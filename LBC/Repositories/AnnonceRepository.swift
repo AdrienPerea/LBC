@@ -8,10 +8,12 @@
 import Foundation
 
 class AnnonceRepository {
+    
+    static let shared = AnnonceRepository()
 
     private var annonceAPI: AnnonceAPI!
 
-    init() {
+    private init() {
         annonceAPI = AnnonceAPI()
     }
 
@@ -32,13 +34,13 @@ class AnnonceRepository {
         }
     }
 
-    func fetchAnnonces(completion: @escaping (Result<Annonces, Error>) -> Void) {
+    func fetchAnnonces(completion: @escaping (Result<AnnoncesResponses, Error>) -> Void) {
         annonceAPI.fetchAnnonces { result in
             switch result {
             case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let annonces = try decoder.decode(Annonces.self, from: data)
+                    let annonces = try decoder.decode(AnnoncesResponses.self, from: data)
                     completion(.success(annonces))
                 } catch {
                     completion(.failure(error))

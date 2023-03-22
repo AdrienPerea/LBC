@@ -132,7 +132,7 @@ class DetailsViewController: UIViewController {
         self.annonceImageView.downloaded(from: annonce.imagesURL.thumb ?? "")
         self.titleLabel.text = annonce.title
         self.priceLabel.text = "\(annonce.price) €"
-        self.categoryLabel.text = "\(annonce.categoryID)"
+        self.categoryLabel.text = "\(annonce.category)"
         self.createdOnLabel.text = annonce.creationDate.toDate().timeAgoSinceDate()
         self.descriptionLabel.text = annonce.description
         self.siretLabel.text = "N° SIRET: " + (annonce.siret ?? "")

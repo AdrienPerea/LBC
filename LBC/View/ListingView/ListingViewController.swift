@@ -10,7 +10,8 @@ import UIKit
 class ListingViewController: UICollectionViewController {
 
     private var viewModel: ListingViewModel!
-
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,8 +20,8 @@ class ListingViewController: UICollectionViewController {
         self.collectionView.backgroundColor = .white
         self.collectionView.register(ListingCell.self, forCellWithReuseIdentifier: "cell")
         configureViewModel()
-        viewModel.fetchCategories()
-        viewModel.fetchAnnonces()
+        viewModel.fetchDatas()
+        collectionView.refreshControl?.beginRefreshing()
     }
     
     private func configureViewModel() {
@@ -28,6 +29,7 @@ class ListingViewController: UICollectionViewController {
             guard let me = self else { return }
             DispatchQueue.main.async {
                 me.collectionView.reloadData()
+                me.collectionView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -40,12 +42,13 @@ class ListingViewController: UICollectionViewController {
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 24) / 2, height: (UIScreen.main.bounds.width - 24) / 2 * 1.92)
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.refreshControl = refreshControl
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ListingCell
         collectionCell.backgroundColor = .white
-        collectionCell.configure(annonce: viewModel.annonces[indexPath.item], categoryName: viewModel.returnCategoryName(categoryId: viewModel.annonces[indexPath.item].categoryID))
+        collectionCell.configure(annonce: viewModel.annonces[indexPath.item])
         return collectionCell
     }
 

@@ -99,15 +99,11 @@ class ListingCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(annonce: Annonce, categoryName: String?) {
+    func configure(annonce: Annonce) {
         configureImageView(imagesURL: annonce.imagesURL)
         self.titleLabel.text = annonce.title
         self.priceLabel.text = "\(annonce.price) €"
-        if let categoryName {
-            self.categoryLabel.text = categoryName
-        } else {
-            self.categoryLabel.text = "\(annonce.categoryID)"
-        }
+        self.categoryLabel.text = annonce.category
         self.createdOnLabel.text = annonce.creationDate.toDate().timeAgoSinceDate()
         addViews(annonce: annonce)
     }

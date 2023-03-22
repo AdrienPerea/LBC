@@ -15,27 +15,49 @@ class ListingViewModel {
     var categories: Categories = []
 
     init() {
-        repository = AnnonceRepository()
+        repository = AnnonceRepository.shared
     }
-
-    func fetchCategories() {
-        repository.fetchCategories { [weak self] result in
-            guard let me = self else { return }
-            switch result {
-            case .success(let categories):
-                me.categories = categories
-            case .failure(let error):
-                print(error.localizedDescription)
+    
+    func fetchDatas() {
+        fetchCategories()
+    }
+    
+    private func fetchCategories() {
+        // in case we have a pull to request and the first call for category don't need to be reused casue the don't change frequently
+        if categories.isEmpty {
+            repository.fetchCategories { [weak self] result in
+                guard let me = self else { return }
+                switch result {
+                case .success(let categories):
+                    me.categories = categories
+                    me.fetchAnnonces()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    me.reloadHandler()
+                }
             }
-            me.reloadHandler()
+        } else {
+            fetchAnnonces()
         }
     }
 
-    func fetchAnnonces() {
+    private func fetchAnnonces() {
         repository.fetchAnnonces { [weak self] result in
             guard let me = self else { return }
             switch result {
-            case .success(let annonces):
+            case .success(let annoncesResponses):
+                let annonces = annoncesResponses.map { annonceResponse -> Annonce in
+                    return Annonce(
+                        id: annonceResponse.id,
+                        category: me.returnCategoryName(categoryId: annonceResponse.categoryID),
+                        title: annonceResponse.title,
+                        description: annonceResponse.description,
+                        price: annonceResponse.price,
+                        imagesURL: annonceResponse.imagesURL,
+                        creationDate: annonceResponse.creationDate,
+                        isUrgent: annonceResponse.isUrgent,
+                        siret: annonceResponse.siret)
+                }
                 me.annonces = annonces
             case .failure(let error):
                 print(error.localizedDescription)
@@ -44,11 +66,11 @@ class ListingViewModel {
         }
     }
     
-    func returnCategoryName(categoryId: Int) -> String? {
+    func returnCategoryName(categoryId: Int) -> String {
         if let category = categories.first(where: { $0.id == categoryId }) {
             return category.name
         }
-        return nil
+        return "no category"
     }
 
 }

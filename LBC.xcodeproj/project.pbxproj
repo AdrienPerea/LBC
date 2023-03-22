@@ -22,17 +22,15 @@
 		0810E42E29CAD90F00BE051B /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E42D29CAD90F00BE051B /* DetailsViewModel.swift */; };
 		0810E43229CAD97300BE051B /* AnnonceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E43129CAD97300BE051B /* AnnonceRepository.swift */; };
 		0810E43429CAD98F00BE051B /* AnnonceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E43329CAD98F00BE051B /* AnnonceAPI.swift */; };
+		08CC552A29CB1BA7003F1C7F /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC552929CB1BA7003F1C7F /* FakeResponseData.swift */; };
+		08CC552C29CB1C75003F1C7F /* annonces.json in Resources */ = {isa = PBXBuildFile; fileRef = 08CC552B29CB1C75003F1C7F /* annonces.json */; };
+		08CC552E29CB1CA0003F1C7F /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 08CC552D29CB1CA0003F1C7F /* categories.json */; };
+		08CC553029CB231C003F1C7F /* AnnonceApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC552F29CB231C003F1C7F /* AnnonceApiTests.swift */; };
+		08CC553229CB2E26003F1C7F /* AnnonceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC553129CB2E26003F1C7F /* AnnonceResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		0810E40129CA1E2600BE051B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0810E3E229CA1E2300BE051B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0810E3E929CA1E2300BE051B;
-			remoteInfo = LBC;
-		};
-		0810E40B29CA1E2600BE051B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0810E3E229CA1E2300BE051B /* Project object */;
 			proxyType = 1;
@@ -51,7 +49,6 @@
 		0810E3FB29CA1E2600BE051B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0810E40029CA1E2600BE051B /* LBCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LBCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0810E40429CA1E2600BE051B /* LBCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBCTests.swift; sourceTree = "<group>"; };
-		0810E40A29CA1E2600BE051B /* LBCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LBCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0810E41E29CA1F1C00BE051B /* Annonce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annonce.swift; sourceTree = "<group>"; };
 		0810E42029CA1F4500BE051B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		0810E42329CA22C100BE051B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
@@ -61,6 +58,11 @@
 		0810E42D29CAD90F00BE051B /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		0810E43129CAD97300BE051B /* AnnonceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnonceRepository.swift; sourceTree = "<group>"; };
 		0810E43329CAD98F00BE051B /* AnnonceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnonceAPI.swift; sourceTree = "<group>"; };
+		08CC552929CB1BA7003F1C7F /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
+		08CC552B29CB1C75003F1C7F /* annonces.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = annonces.json; sourceTree = "<group>"; };
+		08CC552D29CB1CA0003F1C7F /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
+		08CC552F29CB231C003F1C7F /* AnnonceApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnonceApiTests.swift; sourceTree = "<group>"; };
+		08CC553129CB2E26003F1C7F /* AnnonceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnonceResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,13 +74,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0810E3FD29CA1E2600BE051B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0810E40729CA1E2600BE051B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -102,7 +97,6 @@
 			children = (
 				0810E3EA29CA1E2300BE051B /* LBC.app */,
 				0810E40029CA1E2600BE051B /* LBCTests.xctest */,
-				0810E40A29CA1E2600BE051B /* LBCUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +121,7 @@
 		0810E40329CA1E2600BE051B /* LBCTests */ = {
 			isa = PBXGroup;
 			children = (
+				08CC552829CB1B84003F1C7F /* AnnonceAPITests */,
 				0810E40429CA1E2600BE051B /* LBCTests.swift */,
 			);
 			path = LBCTests;
@@ -136,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				0810E41E29CA1F1C00BE051B /* Annonce.swift */,
+				08CC553129CB2E26003F1C7F /* AnnonceResponse.swift */,
 				0810E42029CA1F4500BE051B /* Category.swift */,
 			);
 			path = Model;
@@ -154,8 +150,8 @@
 		0810E42B29CAD8DF00BE051B /* ListingView */ = {
 			isa = PBXGroup;
 			children = (
-				0810E42929CAD8D100BE051B /* ListingViewModel.swift */,
 				0810E3F129CA1E2300BE051B /* ListingViewController.swift */,
+				0810E42929CAD8D100BE051B /* ListingViewModel.swift */,
 			);
 			path = ListingView;
 			sourceTree = "<group>";
@@ -183,6 +179,17 @@
 				0810E43329CAD98F00BE051B /* AnnonceAPI.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		08CC552829CB1B84003F1C7F /* AnnonceAPITests */ = {
+			isa = PBXGroup;
+			children = (
+				08CC552F29CB231C003F1C7F /* AnnonceApiTests.swift */,
+				08CC552929CB1BA7003F1C7F /* FakeResponseData.swift */,
+				08CC552B29CB1C75003F1C7F /* annonces.json */,
+				08CC552D29CB1CA0003F1C7F /* categories.json */,
+			);
+			path = AnnonceAPITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,24 +230,6 @@
 			productReference = 0810E40029CA1E2600BE051B /* LBCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0810E40929CA1E2600BE051B /* LBCUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0810E41A29CA1E2600BE051B /* Build configuration list for PBXNativeTarget "LBCUITests" */;
-			buildPhases = (
-				0810E40629CA1E2600BE051B /* Sources */,
-				0810E40729CA1E2600BE051B /* Frameworks */,
-				0810E40829CA1E2600BE051B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0810E40C29CA1E2600BE051B /* PBXTargetDependency */,
-			);
-			name = LBCUITests;
-			productName = LBCUITests;
-			productReference = 0810E40A29CA1E2600BE051B /* LBCUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -255,10 +244,6 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					0810E3FF29CA1E2600BE051B = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 0810E3E929CA1E2300BE051B;
-					};
-					0810E40929CA1E2600BE051B = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 0810E3E929CA1E2300BE051B;
 					};
@@ -279,7 +264,6 @@
 			targets = (
 				0810E3E929CA1E2300BE051B /* LBC */,
 				0810E3FF29CA1E2600BE051B /* LBCTests */,
-				0810E40929CA1E2600BE051B /* LBCUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -298,13 +282,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0810E40829CA1E2600BE051B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				08CC552C29CB1C75003F1C7F /* annonces.json in Resources */,
+				08CC552E29CB1CA0003F1C7F /* categories.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +304,7 @@
 				0810E42A29CAD8D100BE051B /* ListingViewModel.swift in Sources */,
 				0810E3F029CA1E2300BE051B /* SceneDelegate.swift in Sources */,
 				0810E42E29CAD90F00BE051B /* DetailsViewModel.swift in Sources */,
+				08CC553229CB2E26003F1C7F /* AnnonceResponse.swift in Sources */,
 				0810E42429CA22C100BE051B /* ListingCell.swift in Sources */,
 				0810E42629CA2E0800BE051B /* Extensions.swift in Sources */,
 			);
@@ -335,13 +315,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0810E40529CA1E2600BE051B /* LBCTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0810E40629CA1E2600BE051B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				08CC553029CB231C003F1C7F /* AnnonceApiTests.swift in Sources */,
+				08CC552A29CB1BA7003F1C7F /* FakeResponseData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,11 +327,6 @@
 			isa = PBXTargetDependency;
 			target = 0810E3E929CA1E2300BE051B /* LBC */;
 			targetProxy = 0810E40129CA1E2600BE051B /* PBXContainerItemProxy */;
-		};
-		0810E40C29CA1E2600BE051B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0810E3E929CA1E2300BE051B /* LBC */;
-			targetProxy = 0810E40B29CA1E2600BE051B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -578,40 +548,6 @@
 			};
 			name = Release;
 		};
-		0810E41B29CA1E2600BE051B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adrienPEREA.LBCUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = LBC;
-			};
-			name = Debug;
-		};
-		0810E41C29CA1E2600BE051B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adrienPEREA.LBCUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = LBC;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -638,15 +574,6 @@
 			buildConfigurations = (
 				0810E41829CA1E2600BE051B /* Debug */,
 				0810E41929CA1E2600BE051B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0810E41A29CA1E2600BE051B /* Build configuration list for PBXNativeTarget "LBCUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0810E41B29CA1E2600BE051B /* Debug */,
-				0810E41C29CA1E2600BE051B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
