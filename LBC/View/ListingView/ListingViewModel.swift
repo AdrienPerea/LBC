@@ -10,12 +10,12 @@ import Foundation
 class ListingViewModel {
 
     var reloadHandler: () -> Void = { }
-    private var repository: AnnonceRepository!
+    private var repository: AnnonceRepositoryProtocol!
     var annonces: Annonces = []
     var categories: Categories = []
 
-    init() {
-        repository = AnnonceRepository.shared
+    init(repository: AnnonceRepositoryProtocol = AnnonceRepository.shared) {
+        self.repository = repository
     }
     
     func fetchDatas() {

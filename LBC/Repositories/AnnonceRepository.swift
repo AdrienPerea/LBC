@@ -7,14 +7,19 @@
 
 import Foundation
 
-class AnnonceRepository {
+protocol AnnonceRepositoryProtocol {
+    func fetchCategories(completion: @escaping (Result<Categories, Error>) -> Void)
+    func fetchAnnonces(completion: @escaping (Result<AnnoncesResponses, Error>) -> Void)
+}
+
+class AnnonceRepository: AnnonceRepositoryProtocol {
     
     static let shared = AnnonceRepository()
 
-    private var annonceAPI: AnnonceAPI!
+    var annonceAPI: AnnonceApiProtocol!
 
-    private init() {
-        annonceAPI = AnnonceAPI()
+    private init(annonceAPI: AnnonceApiProtocol = AnnonceAPI()) {
+        self.annonceAPI = annonceAPI
     }
 
     func fetchCategories(completion: @escaping (Result<Categories, Error>) -> Void) {

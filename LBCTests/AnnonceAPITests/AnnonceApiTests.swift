@@ -10,30 +10,183 @@ import XCTest
 
 final class AnnonceApiTests: XCTestCase {
 
-    // MARK: - TEST GetChange
+    // MARK: - TEST Categories
 
-    func testGetChangeGivenDataAndGoodResponseAndNoError() {
+    func test_fetchCategories_withData_withoutError() {
         //given
-        let response = FakeResponseData().reponseOK
-        let jsonData = FakeResponseData().annoncesCorrectData
+        let jsonData = FakeApiData().data
 
-        AnnonceURLProtocol.loadingHandler = { request in
-            return (jsonData, response, nil)
-        }
+        let networkEngine = NetworkEngineMock(data: jsonData)
 
         let expectation = XCTestExpectation(description: "changing queue")
 
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [AnnonceURLProtocol.self]
-
-        let annonceApi = AnnonceAPI(urlSession: URLSession(configuration: configuration))
+        let annonceApi = AnnonceAPI(engine: networkEngine)
 
         annonceApi.fetchCategories(completion: { result in
             switch result {
             case .success(let data):
                 XCTAssertNotNil(data)
+            case .failure(_):
+                XCTFail("test success")
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchAnnonces_withData_withoutError() {
+        //given
+        let jsonData = FakeApiData().data
+
+        let networkEngine = NetworkEngineMock(data: jsonData)
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchAnnonces(completion: { result in
+            switch result {
+            case .success(let data):
+                XCTAssertNotNil(data)
+            case .failure(_):
+                XCTFail("test success")
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchCategories_withData_withError() {
+        //given
+        let jsonData = FakeApiData().data
+        let error: Error = FakeApiData().error
+
+        let networkEngine = NetworkEngineMock(data: jsonData, error: error)
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchCategories(completion: { result in
+            switch result {
+            case .success(_):
+                XCTFail("test fail")
             case .failure(let error):
-                XCTAssertNil(error)
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchAnnonces_withData_withError() {
+        //given
+        let jsonData = FakeApiData().data
+        let error: Error = FakeApiData().error
+
+        let networkEngine = NetworkEngineMock(data: jsonData, error: error)
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchAnnonces(completion: { result in
+            switch result {
+            case .success(_):
+                XCTFail("test fail")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchCategories_withoutData_withError() {
+        //given
+        let error: Error = FakeApiData().error
+
+        let networkEngine = NetworkEngineMock(error: error)
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchCategories(completion: { result in
+            switch result {
+            case .success(_):
+                XCTFail("test fail")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchAnnonces_withoutData_withError() {
+        //given
+        let error: Error = FakeApiData().error
+
+        let networkEngine = NetworkEngineMock(error: error)
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchAnnonces(completion: { result in
+            switch result {
+            case .success(_):
+                XCTFail("test fail")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchCategories_withoutData_withoutError() {
+        //given
+        let networkEngine = NetworkEngineMock()
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchCategories(completion: { result in
+            switch result {
+            case .success(_):
+                XCTFail("test fail")
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1)
+
+    }
+    
+    func test_fetchAnnonces_withoutData_withoutError() {
+        //given
+        let networkEngine = NetworkEngineMock()
+
+        let expectation = XCTestExpectation(description: "changing queue")
+
+        let annonceApi = AnnonceAPI(engine: networkEngine)
+
+        annonceApi.fetchAnnonces(completion: { result in
+            switch result {
+            case .success(_):
+                XCTFail("test fail")
+            case .failure(let error):
+                XCTAssertNotNil(error)
             }
             expectation.fulfill()
         })
@@ -41,37 +194,24 @@ final class AnnonceApiTests: XCTestCase {
 
     }
 
-
 }
 
 // MARK: - Fake URLProtocol
-final class AnnonceURLProtocol: URLProtocol {
-    override class func canInit(with request: URLRequest) -> Bool {
-        return true
+class NetworkEngineMock: NetworkEngine {
+    typealias Handler = NetworkEngine.Handler
+    
+    init(data: Data? = nil, error: Error? = nil) {
+        self.data = data
+        self.error = error
     }
+    
+    let data: Data?
+    let error: Error?
 
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        return request
+    func performRequest(for url: URL, completionHandler: @escaping Handler) {
+        completionHandler(data, nil, error)
     }
-
-    static var loadingHandler: ((URLRequest) -> (Data?, HTTPURLResponse, Error?))?
-
-    override func startLoading() {
-        guard let handler = AnnonceURLProtocol.loadingHandler else {
-            XCTFail("Loading handler is not set.")
-            return
-        }
-        let (data, response, error) = handler(request)
-        if let data = data {
-            client?.urlProtocol(self, didLoad: data)
-            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-            client?.urlProtocolDidFinishLoading(self)
-        }
-        else {
-            client?.urlProtocol(self, didFailWithError: error!)
-        }
-    }
-
-    override func stopLoading() {}
 }
+
+
 
