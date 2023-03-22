@@ -21,7 +21,7 @@ final class AnnonceRepositoryTests: XCTestCase {
 
         let annonceRepo = AnnonceRepository.shared
         annonceRepo.annonceAPI = AnnonceApiMock(result: result)
-        
+
         annonceRepo.fetchCategories { result in
             switch result {
             case .success(_):
@@ -32,9 +32,8 @@ final class AnnonceRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-
     }
-    
+
     func test_fetchCategories_withGoodData() {
         //given
         let datas: Data = FakeRepoData().categoriesCorrectData
@@ -44,7 +43,7 @@ final class AnnonceRepositoryTests: XCTestCase {
 
         let annonceRepo = AnnonceRepository.shared
         annonceRepo.annonceAPI = AnnonceApiMock(result: result)
-        
+
         annonceRepo.fetchCategories { result in
             switch result {
             case .success(let categories):
@@ -55,9 +54,8 @@ final class AnnonceRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-
     }
-    
+
     func test_fetchCategories_withBadData() {
         //given
         let datas: Data = FakeRepoData().incorrectData
@@ -67,7 +65,7 @@ final class AnnonceRepositoryTests: XCTestCase {
 
         let annonceRepo = AnnonceRepository.shared
         annonceRepo.annonceAPI = AnnonceApiMock(result: result)
-        
+
         annonceRepo.fetchCategories { result in
             switch result {
             case .success(_):
@@ -78,11 +76,10 @@ final class AnnonceRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-
     }
-    
+
     // MARK: - TEST Annonces
-    
+
     func test_fetchAnnonces_withError() {
         //given
         let error: Error = FakeApiData().error
@@ -103,9 +100,8 @@ final class AnnonceRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-
     }
-    
+
     func test_fetchAnnonces_withGoodData() {
         //given
         let datas: Data = FakeRepoData().annoncesCorrectData
@@ -115,7 +111,7 @@ final class AnnonceRepositoryTests: XCTestCase {
 
         let annonceRepo = AnnonceRepository.shared
         annonceRepo.annonceAPI = AnnonceApiMock(result: result)
-        
+
         annonceRepo.fetchAnnonces { result in
             switch result {
             case .success(let annonces):
@@ -126,9 +122,8 @@ final class AnnonceRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-
     }
-    
+
     func test_fetchAnnonces_withBadData() {
         //given
         let datas: Data = FakeRepoData().incorrectData
@@ -138,7 +133,7 @@ final class AnnonceRepositoryTests: XCTestCase {
 
         let annonceRepo = AnnonceRepository.shared
         annonceRepo.annonceAPI = AnnonceApiMock(result: result)
-        
+
         annonceRepo.fetchAnnonces { result in
             switch result {
             case .success(_):
@@ -149,24 +144,25 @@ final class AnnonceRepositoryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-
     }
 }
-                                            
+
+// MARK: - AnnonceApi Mock
+
 final class AnnonceApiMock: AnnonceApiProtocol {
-            
+
     init(result: Result<Data, Error>) {
         self.result = result
     }
-            
+
     let result: Result<Data, Error>
-            
+
     func fetchCategories(completion: @escaping (Result<Data, Error>) -> Void) {
         completion(result)
     }
-    
+
     func fetchAnnonces(completion: @escaping (Result<Data, Error>) -> Void) {
         completion(result)
     }
-            
+
 }

@@ -34,7 +34,7 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchAnnonces_withData_withoutError() {
         //given
         let jsonData = FakeApiData().data
@@ -57,7 +57,7 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchCategories_withData_withError() {
         //given
         let jsonData = FakeApiData().data
@@ -81,7 +81,7 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchAnnonces_withData_withError() {
         //given
         let jsonData = FakeApiData().data
@@ -105,7 +105,7 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchCategories_withoutData_withError() {
         //given
         let error: Error = FakeApiData().error
@@ -128,7 +128,7 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchAnnonces_withoutData_withError() {
         //given
         let error: Error = FakeApiData().error
@@ -151,7 +151,7 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchCategories_withoutData_withoutError() {
         //given
         let networkEngine = NetworkEngineMock()
@@ -172,13 +172,11 @@ final class AnnonceApiTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
 
     }
-    
+
     func test_fetchAnnonces_withoutData_withoutError() {
         //given
         let networkEngine = NetworkEngineMock()
-
         let expectation = XCTestExpectation(description: "changing queue")
-
         let annonceApi = AnnonceAPI(engine: networkEngine)
 
         annonceApi.fetchAnnonces(completion: { result in
@@ -191,20 +189,18 @@ final class AnnonceApiTests: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 1)
-
     }
-
 }
 
-// MARK: - Fake URLProtocol
+// MARK: - URLProtocol Mock
 class NetworkEngineMock: NetworkEngine {
     typealias Handler = NetworkEngine.Handler
-    
+
     init(data: Data? = nil, error: Error? = nil) {
         self.data = data
         self.error = error
     }
-    
+
     let data: Data?
     let error: Error?
 
@@ -212,6 +208,3 @@ class NetworkEngineMock: NetworkEngine {
         completionHandler(data, nil, error)
     }
 }
-
-
-

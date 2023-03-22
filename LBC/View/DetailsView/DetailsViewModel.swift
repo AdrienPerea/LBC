@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+class DetailsViewModel {
+
+    // MARK: - Properties
+
+    let annonce: Annonce
+
+    // MARK: - Init
+
+    init(annonce: Annonce) {
+        self.annonce = annonce
+    }
+
+}

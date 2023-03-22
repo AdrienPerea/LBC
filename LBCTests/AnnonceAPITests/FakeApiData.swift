@@ -19,4 +19,3 @@ class FakeApiData {
     let data = "datas".data(using: .utf8)!
 
 }
-

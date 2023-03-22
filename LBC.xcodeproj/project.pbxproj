@@ -136,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				0810E41E29CA1F1C00BE051B /* Annonce.swift */,
-				08CC553129CB2E26003F1C7F /* AnnonceResponse.swift */,
 				0810E42029CA1F4500BE051B /* Category.swift */,
 			);
 			path = Model;
@@ -182,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				0810E43329CAD98F00BE051B /* AnnonceAPI.swift */,
+				08CC553129CB2E26003F1C7F /* AnnonceResponse.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";

@@ -7,11 +7,15 @@
 
 import Foundation
 
-// MARK: - Category
 struct Category: Codable {
+
+    // MARK: - Properties
+
     let id: Int
     let name: String
-    
+
+    // MARK: - Init
+
     init(id: Int, name: String) {
         self.id = id
         self.name = name

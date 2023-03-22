@@ -7,8 +7,10 @@
 
 import Foundation
 
-// MARK: - Annonce
 struct AnnonceResponse: Codable {
+
+    // MARK: - Properties
+
     let id: Int
     let categoryID: Int
     let title: String
@@ -31,6 +33,8 @@ struct AnnonceResponse: Codable {
         case siret
     }
 
+    // MARK: - Init
+
     init(id: Int, categoryID: Int, title: String, description: String, price: Int, imagesURL: ImagesURL, creationDate: String, isUrgent: Bool, siret: String?) {
         self.id = id
         self.categoryID = categoryID
@@ -44,7 +48,6 @@ struct AnnonceResponse: Codable {
     }
 }
 
-// MARK: - ImagesURL
 struct ImagesURL: Codable {
     let small: String?
     let thumb: String?

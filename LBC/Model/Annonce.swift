@@ -7,8 +7,10 @@
 
 import Foundation
 
-// MARK: - Annonce
 struct Annonce: Codable {
+    
+    // MARK: - Properties
+
     let id: Int
     let category: String
     let title: String
@@ -18,6 +20,8 @@ struct Annonce: Codable {
     let creationDate: String
     let isUrgent: Bool
     let siret: String?
+
+    // MARK: - Init
 
     init(id: Int, category: String, title: String, description: String, price: Int, imagesURL: ImagesURL, creationDate: String, isUrgent: Bool, siret: String?) {
         self.id = id

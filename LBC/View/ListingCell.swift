@@ -9,7 +9,9 @@ import UIKit
 
 class ListingCell: UICollectionViewCell {
 
-    let likeButton: UIButton = {
+    // MARK: - Private properties
+
+    private lazy var likeButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.white
         button.layer.cornerRadius = 12
@@ -19,7 +21,7 @@ class ListingCell: UICollectionViewCell {
         return button
     }()
 
-    let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12)
@@ -28,7 +30,7 @@ class ListingCell: UICollectionViewCell {
         return label
     }()
 
-    let priceLabel: UILabel = {
+    private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.lightGray
         label.font = UIFont.systemFont(ofSize: 12)
@@ -36,7 +38,7 @@ class ListingCell: UICollectionViewCell {
         return label
     }()
 
-    let categoryLabel: UILabel = {
+    private lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.darkGray
         label.font = UIFont.systemFont(ofSize: 12)
@@ -44,15 +46,15 @@ class ListingCell: UICollectionViewCell {
         return label
     }()
 
-    let createdOnLabel: UILabel = {
+    private lazy var createdOnLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.lightGray
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    let proLabel: UILabel = {
+
+    private lazy var proLabel: UILabel = {
         let label = UILabel()
         label.text = "PRO"
         label.textAlignment = .center
@@ -65,7 +67,7 @@ class ListingCell: UICollectionViewCell {
         return label
     }()
 
-    let urgentLabel: UILabel = {
+    private lazy var urgentLabel: UILabel = {
         let label = UILabel()
         label.text = "URGENT"
         label.textAlignment = .center
@@ -80,7 +82,7 @@ class ListingCell: UICollectionViewCell {
         return label
     }()
 
-    let annonceImageView: UIImageView = {
+    private lazy var annonceImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.backgroundColor = UIColor.white
@@ -91,14 +93,18 @@ class ListingCell: UICollectionViewCell {
         return imageView
     }()
 
+    // MARK: - Init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Methods
+
     func configure(annonce: Annonce) {
         configureImageView(imagesURL: annonce.imagesURL)
         self.titleLabel.text = annonce.title
@@ -107,20 +113,27 @@ class ListingCell: UICollectionViewCell {
         self.createdOnLabel.text = annonce.creationDate.toDate().timeAgoSinceDate()
         addViews(annonce: annonce)
     }
-    
+
+    // MARK: - Private methods
+
     private func configureImageView(imagesURL: ImagesURL) {
+        annonceImageView.image = UIImage(systemName: "photo")
         if let url = imagesURL.thumb {
             annonceImageView.downloaded(from: url)
         }
     }
 
-    func addViews(annonce: Annonce) {
+    private func addViews(annonce: Annonce) {
+        for view in self.subviews{
+            view.removeFromSuperview()
+        }
         addSubview(annonceImageView)
         addSubview(likeButton)
         addSubview(titleLabel)
         addSubview(priceLabel)
         addSubview(categoryLabel)
         addSubview(createdOnLabel)
+
         if annonce.isUrgent {
             addSubview(urgentLabel)
             urgentLabel.leftAnchor.constraint(equalTo: annonceImageView.leftAnchor, constant: 8).isActive = true
@@ -128,6 +141,7 @@ class ListingCell: UICollectionViewCell {
             urgentLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
             urgentLabel.widthAnchor.constraint(equalToConstant: 65).isActive = true
         }
+
         if annonce.siret != nil {
             addSubview(proLabel)
             proLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
@@ -142,15 +156,15 @@ class ListingCell: UICollectionViewCell {
         annonceImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         annonceImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         annonceImageView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 24) / 2 * 1.22).isActive = true
-        
+
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: annonceImageView.bottomAnchor, constant: 5).isActive = true
-        
+
         priceLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         priceLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         priceLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-        
+
         categoryLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         categoryLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         categoryLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -160,7 +174,7 @@ class ListingCell: UICollectionViewCell {
         createdOnLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         createdOnLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         createdOnLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 5).isActive = true
-        
+
         likeButton.rightAnchor.constraint(equalTo: annonceImageView.rightAnchor, constant: -8).isActive = true
         likeButton.topAnchor.constraint(equalTo: annonceImageView.topAnchor, constant: 8).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 24).isActive = true

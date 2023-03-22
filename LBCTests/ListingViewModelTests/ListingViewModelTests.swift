@@ -39,9 +39,6 @@ final class ListingViewModelTests: XCTestCase {
         
         XCTAssertEqual(listingViewModel.annonces[0].category, "category1")
         XCTAssertEqual(listingViewModel.annonces[1].category, "category2")
-
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 2), "category2")
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 3), "no category")
     }
     
     func test_fetchDatas_withCategoriesFail_AndAnnoncesSuccess() {
@@ -66,8 +63,6 @@ final class ListingViewModelTests: XCTestCase {
 
         XCTAssertEqual(0, listingViewModel.categories.count)
         XCTAssertEqual(0, listingViewModel.annonces.count)
-
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 1), "no category")
     }
     
     func test_fetchDatas_withCategoriesSuccess_andAnnoncesFail() {
@@ -91,9 +86,6 @@ final class ListingViewModelTests: XCTestCase {
         
         XCTAssertEqual(2, listingViewModel.categories.count)
         XCTAssertEqual(0, listingViewModel.annonces.count)
-
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 2), "category2")
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 3), "no category")
     }
     
     func test_fetchDatas_withCategoriesFail_andAnnoncesFail() {
@@ -117,7 +109,6 @@ final class ListingViewModelTests: XCTestCase {
         XCTAssertEqual(0, listingViewModel.categories.count)
         XCTAssertEqual(0, listingViewModel.annonces.count)
 
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 3), "no category")
     }
     
     func test_fetchDatas_withCategoriesSuccess_andAnnoncesSuccess_withCategoryAlreadyFetched() {
@@ -149,8 +140,6 @@ final class ListingViewModelTests: XCTestCase {
         XCTAssertEqual(listingViewModel.annonces[0].category, "category1")
         XCTAssertEqual(listingViewModel.annonces[1].category, "no category")
 
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 2), "no category")
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 1), "category1")
     }
     
     func test_fetchDatas_withCategoriesSuccess_andAnnoncesSuccess_withCategoryAlreadyFetched_andAnnonceAlreadyFetched() {
@@ -180,13 +169,13 @@ final class ListingViewModelTests: XCTestCase {
         XCTAssertEqual(1, listingViewModel.categories.count)
         XCTAssertEqual(2, listingViewModel.annonces.count)
 
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 2), "category2")
-        XCTAssertEqual(listingViewModel.returnCategoryName(categoryId: 1), "no category")
         XCTAssertEqual(listingViewModel.annonces[1].category, "category2")
     }
 
 }
-                                            
+                        
+// MARK: - AnnonceRepository Mock
+
 final class AnnonceRepositoryMock: AnnonceRepositoryProtocol {
             
     var categoriesResult: Result<Categories, Error> = Result<Categories, Error>.failure(FakeApiData().error)

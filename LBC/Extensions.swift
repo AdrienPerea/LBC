@@ -60,7 +60,7 @@ extension Date {
             return formatter.string(from: self)
         }
     }
-    
+
     var toString: String {
         let dateFormatter = ISO8601DateFormatter()
         return dateFormatter.string(from: self)
@@ -73,5 +73,14 @@ extension String {
         newDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         newDateFormatter.locale = Locale.current
         return newDateFormatter.date(from: self) ?? Date()
+    }
+}
+
+extension URLSession: NetworkEngine {
+    typealias Handler = NetworkEngine.Handler
+
+    func performRequest(for url: URL, completionHandler: @escaping Handler) {
+        let task = dataTask(with: url, completionHandler: completionHandler)
+        task.resume()
     }
 }

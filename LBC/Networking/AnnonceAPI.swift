@@ -18,18 +18,7 @@ protocol NetworkEngine {
     func performRequest(for url: URL, completionHandler: @escaping Handler)
 }
 
-extension URLSession: NetworkEngine {
-    typealias Handler = NetworkEngine.Handler
-
-    func performRequest(for url: URL, completionHandler: @escaping Handler) {
-        let task = dataTask(with: url, completionHandler: completionHandler)
-        task.resume()
-    }
-}
-
 class AnnonceAPI: AnnonceApiProtocol {
-    
-    private var networkEngine: NetworkEngine
 
     // MARK: - Init
 
@@ -37,7 +26,10 @@ class AnnonceAPI: AnnonceApiProtocol {
         self.networkEngine = engine
     }
 
+    // MARK: - Private properties
+
     private let apiPath: String = "https://raw.githubusercontent.com/leboncoin/paperclip/master/"
+    private var networkEngine: NetworkEngine
 
     enum endPoint {
         case categories
@@ -52,6 +44,8 @@ class AnnonceAPI: AnnonceApiProtocol {
             }
         }
     }
+
+    // MARK: - Methods
 
     func fetchCategories(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = URL(string: apiPath + endPoint.categories.url)!

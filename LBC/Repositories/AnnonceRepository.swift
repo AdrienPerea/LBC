@@ -13,14 +13,19 @@ protocol AnnonceRepositoryProtocol {
 }
 
 class AnnonceRepository: AnnonceRepositoryProtocol {
-    
-    static let shared = AnnonceRepository()
 
+    // MARK: - Properties
+
+    static let shared = AnnonceRepository()
     var annonceAPI: AnnonceApiProtocol!
+
+    // MARK: - Private init
 
     private init(annonceAPI: AnnonceApiProtocol = AnnonceAPI()) {
         self.annonceAPI = annonceAPI
     }
+
+    // MARK: - Methods
 
     func fetchCategories(completion: @escaping (Result<Categories, Error>) -> Void) {
         annonceAPI.fetchCategories { result in

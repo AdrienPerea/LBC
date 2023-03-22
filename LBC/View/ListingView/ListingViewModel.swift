@@ -9,19 +9,30 @@ import Foundation
 
 class ListingViewModel {
 
+    // MARK: - Properties
+
     var reloadHandler: () -> Void = { }
-    private var repository: AnnonceRepositoryProtocol!
     var annonces: Annonces = []
     var categories: Categories = []
+
+    // MARK: - Private properties
+
+    private var repository: AnnonceRepositoryProtocol!
+
+    // MARK: - Init
 
     init(repository: AnnonceRepositoryProtocol = AnnonceRepository.shared) {
         self.repository = repository
     }
-    
+
+    // MARK: - Methods
+
     func fetchDatas() {
         fetchCategories()
     }
-    
+
+    // MARK: - Private methods
+
     private func fetchCategories() {
         // in case we have a pull to request and the first call for category don't need to be reused casue the don't change frequently
         if categories.isEmpty {
@@ -65,8 +76,8 @@ class ListingViewModel {
             me.reloadHandler()
         }
     }
-    
-    func returnCategoryName(categoryId: Int) -> String {
+
+    private func returnCategoryName(categoryId: Int) -> String {
         if let category = categories.first(where: { $0.id == categoryId }) {
             return category.name
         }
