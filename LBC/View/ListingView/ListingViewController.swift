@@ -9,11 +9,27 @@ import UIKit
 
 class ListingViewController: UICollectionViewController {
 
+    private var viewModel: ListingViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel = ListingViewModel()
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.backgroundColor = .white
         self.collectionView.register(ListingCell.self, forCellWithReuseIdentifier: "cell")
+        configureViewModel()
+        viewModel.fetchCategories()
+        viewModel.fetchAnnonces()
+    }
+    
+    private func configureViewModel() {
+        viewModel.reloadHandler = { [weak self] in
+            guard let me = self else { return }
+            DispatchQueue.main.async {
+                me.collectionView.reloadData()
+            }
+        }
     }
 
     override func loadView() {
@@ -25,21 +41,21 @@ class ListingViewController: UICollectionViewController {
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ListingCell
         collectionCell.backgroundColor = .white
-        collectionCell.configure(annonce: Annonce.mock)
+        collectionCell.configure(annonce: viewModel.annonces[indexPath.item], categoryName: viewModel.returnCategoryName(categoryId: viewModel.annonces[indexPath.item].categoryID))
         return collectionCell
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsVC = DetailsViewController(annonce: Annonce.mock)
+        let detailsVC = DetailsViewController(annonce: viewModel.annonces[indexPath.item])
         detailsVC.modalPresentationStyle = .fullScreen
         self.present(detailsVC, animated: true, completion: nil)
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return viewModel.annonces.count
     }
 }

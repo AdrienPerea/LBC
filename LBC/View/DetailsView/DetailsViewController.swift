@@ -133,7 +133,7 @@ class DetailsViewController: UIViewController {
         self.titleLabel.text = annonce.title
         self.priceLabel.text = "\(annonce.price) €"
         self.categoryLabel.text = "\(annonce.categoryID)"
-        self.createdOnLabel.text = annonce.creationDate.timeAgoSinceDate()
+        self.createdOnLabel.text = annonce.creationDate.toDate().timeAgoSinceDate()
         self.descriptionLabel.text = annonce.description
         self.siretLabel.text = "N° SIRET: " + (annonce.siret ?? "")
     }
@@ -166,7 +166,7 @@ class DetailsViewController: UIViewController {
             descriptionLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5).isActive = true
         }
         
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true

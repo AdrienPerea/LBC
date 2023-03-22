@@ -18,6 +18,10 @@
 		0810E42429CA22C100BE051B /* ListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E42329CA22C100BE051B /* ListingCell.swift */; };
 		0810E42629CA2E0800BE051B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E42529CA2E0800BE051B /* Extensions.swift */; };
 		0810E42829CA479100BE051B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E42729CA479100BE051B /* DetailsViewController.swift */; };
+		0810E42A29CAD8D100BE051B /* ListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E42929CAD8D100BE051B /* ListingViewModel.swift */; };
+		0810E42E29CAD90F00BE051B /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E42D29CAD90F00BE051B /* DetailsViewModel.swift */; };
+		0810E43229CAD97300BE051B /* AnnonceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E43129CAD97300BE051B /* AnnonceRepository.swift */; };
+		0810E43429CAD98F00BE051B /* AnnonceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0810E43329CAD98F00BE051B /* AnnonceAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		0810E42329CA22C100BE051B /* ListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCell.swift; sourceTree = "<group>"; };
 		0810E42529CA2E0800BE051B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0810E42729CA479100BE051B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		0810E42929CAD8D100BE051B /* ListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewModel.swift; sourceTree = "<group>"; };
+		0810E42D29CAD90F00BE051B /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		0810E43129CAD97300BE051B /* AnnonceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnonceRepository.swift; sourceTree = "<group>"; };
+		0810E43329CAD98F00BE051B /* AnnonceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnonceAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,8 @@
 			children = (
 				0810E42229CA22A000BE051B /* View */,
 				0810E41D29CA1F0D00BE051B /* Model */,
+				0810E42F29CAD93100BE051B /* Repositories */,
+				0810E43029CAD94800BE051B /* Networking */,
 				0810E3ED29CA1E2300BE051B /* AppDelegate.swift */,
 				0810E3EF29CA1E2300BE051B /* SceneDelegate.swift */,
 				0810E42529CA2E0800BE051B /* Extensions.swift */,
@@ -135,10 +145,44 @@
 			isa = PBXGroup;
 			children = (
 				0810E42329CA22C100BE051B /* ListingCell.swift */,
-				0810E3F129CA1E2300BE051B /* ListingViewController.swift */,
-				0810E42729CA479100BE051B /* DetailsViewController.swift */,
+				0810E42B29CAD8DF00BE051B /* ListingView */,
+				0810E42C29CAD8F800BE051B /* DetailsView */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0810E42B29CAD8DF00BE051B /* ListingView */ = {
+			isa = PBXGroup;
+			children = (
+				0810E42929CAD8D100BE051B /* ListingViewModel.swift */,
+				0810E3F129CA1E2300BE051B /* ListingViewController.swift */,
+			);
+			path = ListingView;
+			sourceTree = "<group>";
+		};
+		0810E42C29CAD8F800BE051B /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				0810E42729CA479100BE051B /* DetailsViewController.swift */,
+				0810E42D29CAD90F00BE051B /* DetailsViewModel.swift */,
+			);
+			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		0810E42F29CAD93100BE051B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0810E43129CAD97300BE051B /* AnnonceRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0810E43029CAD94800BE051B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0810E43329CAD98F00BE051B /* AnnonceAPI.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,10 +317,14 @@
 			files = (
 				0810E3F229CA1E2300BE051B /* ListingViewController.swift in Sources */,
 				0810E42129CA1F4500BE051B /* Category.swift in Sources */,
+				0810E43229CAD97300BE051B /* AnnonceRepository.swift in Sources */,
+				0810E43429CAD98F00BE051B /* AnnonceAPI.swift in Sources */,
 				0810E3EE29CA1E2300BE051B /* AppDelegate.swift in Sources */,
 				0810E42829CA479100BE051B /* DetailsViewController.swift in Sources */,
 				0810E41F29CA1F1C00BE051B /* Annonce.swift in Sources */,
+				0810E42A29CAD8D100BE051B /* ListingViewModel.swift in Sources */,
 				0810E3F029CA1E2300BE051B /* SceneDelegate.swift in Sources */,
+				0810E42E29CAD90F00BE051B /* DetailsViewModel.swift in Sources */,
 				0810E42429CA22C100BE051B /* ListingCell.swift in Sources */,
 				0810E42629CA2E0800BE051B /* Extensions.swift in Sources */,
 			);

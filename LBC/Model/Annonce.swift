@@ -15,7 +15,7 @@ struct Annonce: Codable {
     let description: String
     let price: Int
     let imagesURL: ImagesURL
-    let creationDate: Date
+    let creationDate: String
     let isUrgent: Bool
     let siret: String?
 
@@ -30,8 +30,8 @@ struct Annonce: Codable {
         case isUrgent = "is_urgent"
         case siret
     }
-    
-    init(id: Int, categoryID: Int, title: String, description: String, price: Int, imagesURL: ImagesURL, creationDate: Date, isUrgent: Bool, siret: String?) {
+
+    init(id: Int, categoryID: Int, title: String, description: String, price: Int, imagesURL: ImagesURL, creationDate: String, isUrgent: Bool, siret: String?) {
         self.id = id
         self.categoryID = categoryID
         self.title = title
@@ -42,7 +42,7 @@ struct Annonce: Codable {
         self.isUrgent = isUrgent
         self.siret = siret
     }
-    
+
     static var mock: Annonce {
         let calendar = Calendar.current
         var dateComponents = DateComponents()
@@ -57,7 +57,7 @@ struct Annonce: Codable {
                 small: "https://raw.githubusercontent.com/leboncoin/paperclip/master/ad-small/2c9563bbe85f12a5dcaeb2c40989182463270404.jpg",
                 thumb: "https://raw.githubusercontent.com/leboncoin/paperclip/master/ad-thumb/2c9563bbe85f12a5dcaeb2c40989182463270404.jpg"
             ),
-            creationDate: calendar.date(byAdding: dateComponents, to: Date())!,
+            creationDate: Date().toString,
             isUrgent: true,
             siret: "192 192 192 192"
         )

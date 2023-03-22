@@ -82,10 +82,12 @@ class ListingCell: UICollectionViewCell {
 
     let annonceImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
+        imageView.backgroundColor = UIColor.white
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 8
+        imageView.image = UIImage(systemName: "photo")
         return imageView
     }()
 
@@ -97,13 +99,23 @@ class ListingCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(annonce: Annonce) {
-        self.annonceImageView.downloaded(from: annonce.imagesURL.thumb ?? "")
+    func configure(annonce: Annonce, categoryName: String?) {
+        configureImageView(imagesURL: annonce.imagesURL)
         self.titleLabel.text = annonce.title
         self.priceLabel.text = "\(annonce.price) €"
-        self.categoryLabel.text = "\(annonce.categoryID)"
-        self.createdOnLabel.text = annonce.creationDate.timeAgoSinceDate()
+        if let categoryName {
+            self.categoryLabel.text = categoryName
+        } else {
+            self.categoryLabel.text = "\(annonce.categoryID)"
+        }
+        self.createdOnLabel.text = annonce.creationDate.toDate().timeAgoSinceDate()
         addViews(annonce: annonce)
+    }
+    
+    private func configureImageView(imagesURL: ImagesURL) {
+        if let url = imagesURL.thumb {
+            annonceImageView.downloaded(from: url)
+        }
     }
 
     func addViews(annonce: Annonce) {
@@ -115,6 +127,10 @@ class ListingCell: UICollectionViewCell {
         addSubview(createdOnLabel)
         if annonce.isUrgent {
             addSubview(urgentLabel)
+            urgentLabel.leftAnchor.constraint(equalTo: annonceImageView.leftAnchor, constant: 8).isActive = true
+            urgentLabel.topAnchor.constraint(equalTo: annonceImageView.topAnchor, constant: 8).isActive = true
+            urgentLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+            urgentLabel.widthAnchor.constraint(equalToConstant: 65).isActive = true
         }
         if annonce.siret != nil {
             addSubview(proLabel)
@@ -122,6 +138,9 @@ class ListingCell: UICollectionViewCell {
             proLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
             proLabel.topAnchor.constraint(equalTo: annonceImageView.bottomAnchor, constant: 5).isActive = true
             proLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
+        } else {
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         }
 
         annonceImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -129,7 +148,6 @@ class ListingCell: UICollectionViewCell {
         annonceImageView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 24) / 2 * 1.22).isActive = true
         
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: annonce.siret != nil ? proLabel.leftAnchor : rightAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: annonceImageView.bottomAnchor, constant: 5).isActive = true
         
         priceLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -151,11 +169,6 @@ class ListingCell: UICollectionViewCell {
         likeButton.topAnchor.constraint(equalTo: annonceImageView.topAnchor, constant: 8).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         likeButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        
-        urgentLabel.leftAnchor.constraint(equalTo: annonceImageView.leftAnchor, constant: 8).isActive = true
-        urgentLabel.topAnchor.constraint(equalTo: annonceImageView.topAnchor, constant: 8).isActive = true
-        urgentLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        urgentLabel.widthAnchor.constraint(equalToConstant: 65).isActive = true
     }
 
 }
