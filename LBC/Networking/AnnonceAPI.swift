@@ -10,6 +10,7 @@ import Foundation
 protocol AnnonceApiProtocol {
     func fetchCategories(completion: @escaping (Result<Data, Error>) -> Void)
     func fetchAnnonces(completion: @escaping (Result<Data, Error>) -> Void)
+    func fetchData(endpoint: AnnonceAPI.endPoint, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
 protocol NetworkEngine {
@@ -46,6 +47,19 @@ class AnnonceAPI: AnnonceApiProtocol {
     }
 
     // MARK: - Methods
+    
+    func fetchData(endpoint: endPoint, completion: @escaping (Result<Data, Error>) -> Void) {
+        switch endpoint {
+        case .annonces :
+            fetchAnnonces { result in
+                completion(result)
+            }
+        case .categories :
+            fetchCategories { result in
+                completion(result)
+            }
+        }
+    }
 
     func fetchCategories(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = URL(string: apiPath + endPoint.categories.url)!

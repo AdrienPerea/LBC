@@ -8,8 +8,7 @@
 import Foundation
 
 protocol AnnonceRepositoryProtocol {
-    func fetchCategories(completion: @escaping (Result<Categories, Error>) -> Void)
-    func fetchAnnonces(completion: @escaping (Result<AnnoncesResponses, Error>) -> Void)
+    func fetchData<T:Decodable>(endpoint: AnnonceAPI.endPoint, completion: @escaping (Result<T, Error>) -> Void)
 }
 
 class AnnonceRepository: AnnonceRepositoryProtocol {
@@ -26,32 +25,15 @@ class AnnonceRepository: AnnonceRepositoryProtocol {
     }
 
     // MARK: - Methods
-
-    func fetchCategories(completion: @escaping (Result<Categories, Error>) -> Void) {
-        annonceAPI.fetchCategories { result in
+    
+    func fetchData<T:Decodable>(endpoint: AnnonceAPI.endPoint, completion: @escaping (Result<T, Error>) -> Void) {
+        annonceAPI.fetchData(endpoint: endpoint) { result in
             switch result {
             case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let annonces = try decoder.decode(Categories.self, from: data)
-                    completion(.success(annonces))
-                } catch {
-                    completion(.failure(error))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
-    func fetchAnnonces(completion: @escaping (Result<AnnoncesResponses, Error>) -> Void) {
-        annonceAPI.fetchAnnonces { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let annonces = try decoder.decode(AnnoncesResponses.self, from: data)
-                    completion(.success(annonces))
+                    let decodedData = try decoder.decode(T.self, from: data)
+                    completion(.success(decodedData))
                 } catch {
                     completion(.failure(error))
                 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Annonce: Codable {
+struct Annonce: Decodable {
     
     // MARK: - Properties
 

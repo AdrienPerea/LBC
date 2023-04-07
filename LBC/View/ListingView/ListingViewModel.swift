@@ -36,7 +36,7 @@ class ListingViewModel {
     private func fetchCategories() {
         // in case we have a pull to request and the first call for category don't need to be reused casue the don't change frequently
         if categories.isEmpty {
-            repository.fetchCategories { [weak self] result in
+            repository.fetchData(endpoint: .categories) { [weak self] (result: Result<Categories, Error>) in
                 guard let me = self else { return }
                 switch result {
                 case .success(let categories):
@@ -53,7 +53,7 @@ class ListingViewModel {
     }
 
     private func fetchAnnonces() {
-        repository.fetchAnnonces { [weak self] result in
+        repository.fetchData(endpoint: .annonces) { [weak self] (result: Result<AnnoncesResponses, Error>) in
             guard let me = self else { return }
             switch result {
             case .success(let annoncesResponses):

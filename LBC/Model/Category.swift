@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Category: Codable {
+struct Category: Decodable {
 
     // MARK: - Properties
 

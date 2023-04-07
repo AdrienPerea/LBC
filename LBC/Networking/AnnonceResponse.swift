@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AnnonceResponse: Codable {
+struct AnnonceResponse: Decodable {
 
     // MARK: - Properties
 
@@ -48,7 +48,7 @@ struct AnnonceResponse: Codable {
     }
 }
 
-struct ImagesURL: Codable {
+struct ImagesURL: Decodable {
     let small: String?
     let thumb: String?
 }
