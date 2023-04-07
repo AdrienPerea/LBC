@@ -17,7 +17,7 @@ class ListingViewModel {
 
     // MARK: - Private properties
 
-    private var repository: AnnonceRepositoryProtocol!
+    private var repository: AnnonceRepositoryProtocol
 
     // MARK: - Init
 

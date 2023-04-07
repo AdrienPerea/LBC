@@ -49,23 +49,25 @@ class AnnonceAPI: AnnonceApiProtocol {
 
     func fetchCategories(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = URL(string: apiPath + endPoint.categories.url)!
-        networkEngine.performRequest(for: url) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(.failure(error ?? NSError(domain: "AnnonceAPIErrorDomain", code: 1, userInfo: nil)))
-                return
-            }
-            completion(.success(data))
+        performRequest(url: url) { result in
+            completion(result)
         }
     }
 
     func fetchAnnonces(completion: @escaping (Result<Data, Error>) -> Void) {
         let url = URL(string: apiPath + endPoint.annonces.url)!
+        performRequest(url: url) { result in
+            completion(result)
+        }
+    }
+    
+    private func performRequest(url: URL, result: @escaping (Result<Data, Error>) -> Void) {
         networkEngine.performRequest(for: url) { (data, response, error) in
             guard let data = data, error == nil else {
-                completion(.failure(error ?? NSError(domain: "AnnonceAPIErrorDomain", code: 1, userInfo: nil)))
+                result(.failure(error ?? NSError(domain: "AnnonceAPIErrorDomain", code: 1, userInfo: nil)))
                 return
             }
-            completion(.success(data))
+            result(.success(data))
         }
     }
 
